@@ -22,7 +22,7 @@ namespace PerfectChannel.WebApi.Services
         {
             var pendingList = Tasks.Where(q => q.Value.Status == Statuses.Pending).Select(q => new KeyValuePair<string, string>(q.Key, q.Value.Description));
             var completedList = Tasks.Where(q => q.Value.Status == Statuses.Completed).Select(q => new KeyValuePair<string, string>(q.Key, q.Value.Description));
-            List<dynamic> list = new List<dynamic>
+            var list = new List<dynamic>
             {
                 pendingList,
                 completedList
@@ -36,8 +36,8 @@ namespace PerfectChannel.WebApi.Services
         /// <returns>true if successfully added to the list, false in other case</returns>
         public bool AddTask(string taskDescription)
         {
-            // 3 Retries
-            var attempts = 3;
+            // 5 Retries
+            var attempts = 5;
             while (attempts > 0)
             {
                 Guid g = Guid.NewGuid();

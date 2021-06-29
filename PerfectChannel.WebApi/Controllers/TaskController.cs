@@ -36,22 +36,40 @@ namespace PerfectChannel.WebApi.Controllers
         [Route("add/{taskDescription}")]
         public IActionResult AddTask(string taskDescription)
         {
-            if (!_todoListService.AddTask(taskDescription))
+            try
+            {
+                if (string.IsNullOrEmpty(taskDescription))
+                {
+                    return Forbid();
+                }
+                if (!_todoListService.AddTask(taskDescription))
+                {
+                    return Forbid();
+                }
+                return Ok();
+            }
+            catch
             {
                 return Forbid();
             }
-            return Ok();
         }
 
         [HttpPost]
         [Route("changeStatus/{taskId}")]
         public IActionResult ChangeStatus(string taskId)
         {
-            if (string.IsNullOrEmpty(taskId) || !_todoListService.ChangeStatus(taskId))
+            try
             {
-                return NotFound();
+                if (string.IsNullOrEmpty(taskId) || !_todoListService.ChangeStatus(taskId))
+                {
+                    return NotFound();
+                }
+                return Ok();
             }
-            return Ok();
+            catch
+            {
+                return Forbid();
+            }
         }
     }
 }
