@@ -22,7 +22,7 @@ namespace PerfectChannel.WebApi.Services
         {
             var pendingList = Tasks.Where(q => q.Value.Status == Statuses.Pending).Select(q => new KeyValuePair<string, string>(q.Key, q.Value.Description));
             var completedList = Tasks.Where(q => q.Value.Status == Statuses.Completed).Select(q => new KeyValuePair<string, string>(q.Key, q.Value.Description));
-            List<dynamic> list = new List<dynamic>
+            var list = new List<dynamic>
             {
                 pendingList,
                 completedList
