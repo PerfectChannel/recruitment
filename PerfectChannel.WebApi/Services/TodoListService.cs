@@ -36,8 +36,8 @@ namespace PerfectChannel.WebApi.Services
         /// <returns>true if successfully added to the list, false in other case</returns>
         public bool AddTask(string taskDescription)
         {
-            // 3 Retries
-            var attempts = 3;
+            // 5 Retries
+            var attempts = 5;
             while (attempts > 0)
             {
                 Guid g = Guid.NewGuid();
