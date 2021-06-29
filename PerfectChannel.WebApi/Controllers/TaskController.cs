@@ -38,6 +38,10 @@ namespace PerfectChannel.WebApi.Controllers
         {
             try
             {
+                if (string.IsNullOrEmpty(taskDescription))
+                {
+                    return Forbid();
+                }
                 if (!_todoListService.AddTask(taskDescription))
                 {
                     return Forbid();
